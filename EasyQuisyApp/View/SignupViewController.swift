@@ -12,7 +12,7 @@ protocol SignupViewDelegate : NSObjectProtocol {
 
 class SignupViewController: UIViewController, SignupViewDelegate {
    
-    private let signupPresenter = SignupPresenter(dataService: DataService.getDataService())
+    private let signupPresenter = SignupPresenter()
     
     private var emailTextField: UITextField!
     private var usernameTextField: UITextField!

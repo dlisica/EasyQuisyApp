@@ -13,7 +13,7 @@ protocol LoginViewDelegate: NSObjectProtocol {
 
 class LoginViewController: UIViewController, LoginViewDelegate {
     
-    private let loginPresenter = LoginPresenter(dataService: DataService.getDataService())
+    private let loginPresenter = LoginPresenter()
     
     private var usernameTextField: UITextField!
     private var passwordTextField: UITextField!

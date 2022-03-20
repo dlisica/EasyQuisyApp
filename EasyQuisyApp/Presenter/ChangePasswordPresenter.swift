@@ -2,14 +2,9 @@ import Foundation
 
 class ChangePasswordPresenter {
     
-    private let dataService : DataService
-    weak private var changePasswordViewDelegate : ChangePasswordViewDelegate?
-        
-    init(dataService : DataService){
-        self.dataService = dataService
-    }
+    weak private var changePasswordViewDelegate: ChangePasswordViewDelegate?
     
-    func setViewDelegate(changePasswordViewDelegate : ChangePasswordViewDelegate?){
+    func setViewDelegate(changePasswordViewDelegate: ChangePasswordViewDelegate?){
         self.changePasswordViewDelegate = changePasswordViewDelegate
     }
     
@@ -36,13 +31,20 @@ class ChangePasswordPresenter {
             return
         }
         
-        let status = dataService.changePassword(oldPassword: oldPassword, newPassword: newPassword)
-        
-        if case Status.success = status {
-            changePasswordViewDelegate?.returnToSettingsScreen()
-        } else {
-            changePasswordViewDelegate?.showErrorLabel(text: status.getMessage()!)
+        let status = Validator.validatePassword(password: newPassword)
+        if case Status.error(let message) = status {
+            changePasswordViewDelegate?.showErrorLabel(text: message)
+            return
         }
+        
+        NetworkService.changePassword(playerId: DataService.getDataService().currentPlayer.id, oldPassword: oldPassword, newPassword: newPassword) { (status: Status) in
+            if case Status.success = status {
+                self.changePasswordViewDelegate?.returnToSettingsScreen()
+            } else {
+                self.changePasswordViewDelegate?.showErrorLabel(text: "Network error occured. Please try again.")
+            }
+        }
+      
     }
     
 }

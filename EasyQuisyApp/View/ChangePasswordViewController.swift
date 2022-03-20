@@ -1,6 +1,6 @@
 import UIKit
 
-protocol ChangePasswordViewDelegate : NSObjectProtocol {
+protocol ChangePasswordViewDelegate: NSObjectProtocol {
     
     func showErrorLabel(text: String)
     func hideErrorLabel()
@@ -12,7 +12,7 @@ protocol ChangePasswordViewDelegate : NSObjectProtocol {
 
 class ChangePasswordViewController: UIViewController, ChangePasswordViewDelegate {
     
-    private let changePasswordPresenter = ChangePasswordPresenter(dataService: DataService.getDataService())
+    private let changePasswordPresenter = ChangePasswordPresenter()
 
     private var oldPasswordTextField: UITextField!
     private var newPasswordTextField: UITextField!

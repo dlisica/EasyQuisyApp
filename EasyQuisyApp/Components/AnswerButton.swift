@@ -1,10 +1,3 @@
-//
-//  AnswerLabel.swift
-//  PopQuizApp
-//
-//  Created by David Lisica on 22.12.2021.
-//
-
 import UIKit
 
 class AnswerButton: UIButton {

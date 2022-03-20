@@ -2,23 +2,40 @@ import Foundation
 
 class LeaderboardPresenter {
     
-    private let dataService : DataService
-    weak private var leaderBoardViewDelegate : LeaderboardViewDelegate?
+    private var dataService = DataService.getDataService()
     
-    init(dataService : DataService) {
-        self.dataService = dataService
+    private var leaderboard = [Player]() {
+        didSet {
+            leaderBoardViewDelegate?.updateUI()
+        }
     }
     
-    func setViewDelegate(leaderBoardViewDelegate : LeaderboardViewDelegate?){
+    weak private var leaderBoardViewDelegate: LeaderboardViewDelegate?
+    
+    func setViewDelegate(leaderBoardViewDelegate: LeaderboardViewDelegate?){
         self.leaderBoardViewDelegate = leaderBoardViewDelegate
     }
     
-    func getLeaderboard() -> [Player] {
-        return dataService.leaderboard
+    init() {
+        refreshLeaderboard()
+    }
+    
+    private func refreshLeaderboard() {
+        NetworkService.fetchLeaderboard() { (leaderboard: [Player]) in
+            self.leaderboard = leaderboard
+        }
+    }
+    
+    func getNumberOfPlayers() -> Int {
+        return leaderboard.count
+    }
+    
+    func getPlayer(atIndex index: Int) -> Player {
+        return leaderboard[index]
     }
     
     func isCurrentPlayer(player: Player) -> Bool {
-        return player.id == dataService.currentPlayer.id
+        return dataService.currentPlayer.id == player.id
     }
     
 }

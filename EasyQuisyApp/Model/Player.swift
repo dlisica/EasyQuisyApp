@@ -1,6 +1,6 @@
 import Foundation
 
-struct Player: Codable {
+struct Player: Codable, Equatable {
     
     let id: String
     let emailAdress: String
@@ -12,7 +12,7 @@ struct Player: Codable {
     var averagePlayingTime: Double
     
     init(emailAdress: String, username: String, password: String, dateOfRegistration: String) {
-        self.id = "61fd488ff66679169b789848"
+        self.id = "0000"
         self.emailAdress = emailAdress
         self.username = username
         self.password = password

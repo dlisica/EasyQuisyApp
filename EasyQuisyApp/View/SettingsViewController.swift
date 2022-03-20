@@ -1,15 +1,18 @@
 import UIKit
 
-protocol SettingsViewDelegate : NSObjectProtocol {
+protocol SettingsViewDelegate: NSObjectProtocol {
+    func updateUI()
 }
 
 class SettingsViewController: UIViewController, SettingsViewDelegate {
-    
-    private let settingsPresenter = SettingsPresenter(dataService: DataService.getDataService())
+  
+    private let settingsPresenter = SettingsPresenter()
     
     private var leaderboardButton: CustomUIButton!
     private var changePasswordButton: CustomUIButton!
     private var logoutButton: CustomUIButton!
+    
+    private var scoreProperty: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +28,7 @@ class SettingsViewController: UIViewController, SettingsViewDelegate {
         self.view.backgroundColor = SystemDesign.backgroundColor
         navigationItem.titleView = TitleUILabel(textSize: 25)
         
-        let titleLabel : UILabel = TitleUILabel(textSize: 45.0)
+        let titleLabel: UILabel = TitleUILabel(textSize: 45.0)
         titleLabel.text = "Settings"
         self.view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (maker) in
@@ -35,35 +38,47 @@ class SettingsViewController: UIViewController, SettingsViewDelegate {
             maker.top.equalToSuperview().offset(100)
         }
         
-        let usernameLabel = SmallUILabel(text: "Username")
+        let usernameLabel = UILabel()
+        usernameLabel.text = "Username"
+        usernameLabel.font = UIFont.systemFont(ofSize: 15)
         self.view.addSubview(usernameLabel)
         usernameLabel.snp.makeConstraints { (maker) in
             maker.centerX.equalToSuperview()
             maker.top.equalTo(titleLabel.snp.bottom).offset(30)
         }
         
-        let usernameProperty = BigUILabel(text: settingsPresenter.getCurrentPlayerUsername())
+        let usernameProperty = UILabel()
+        usernameProperty.text = settingsPresenter.getCurrentPlayerUsername()
+        usernameProperty.font = UIFont.boldSystemFont(ofSize: 25.0)
+        usernameProperty.numberOfLines = 2
         self.view.addSubview(usernameProperty)
         usernameProperty.snp.makeConstraints { (maker) in
             maker.centerX.equalToSuperview()
             maker.top.equalTo(usernameLabel.snp.bottom).offset(10)
         }
         
-        let emailLabel = SmallUILabel(text: "E-mail adress")
+        let emailLabel = UILabel()
+        emailLabel.text = "E-mail adress"
+        emailLabel.font = UIFont.systemFont(ofSize: 15)
         self.view.addSubview(emailLabel)
         emailLabel.snp.makeConstraints { (maker) in
             maker.centerX.equalToSuperview()
             maker.top.equalTo(usernameProperty.snp.bottom).offset(40)
         }
         
-        let emailProperty = BigUILabel(text: settingsPresenter.getCurrentPlayerEmail())
+        let emailProperty = UILabel()
+        emailProperty.text = settingsPresenter.getCurrentPlayerEmail()
+        emailProperty.font = UIFont.boldSystemFont(ofSize: 25.0)
+        emailProperty.numberOfLines = 2
         self.view.addSubview(emailProperty)
         emailProperty.snp.makeConstraints { (maker) in
             maker.centerX.equalToSuperview()
             maker.top.equalTo(emailLabel.snp.bottom).offset(10)
         }
         
-        let dateOfRegLabel = SmallUILabel(text: "Date of registration")
+        let dateOfRegLabel = UILabel()
+        dateOfRegLabel.text = "Date of registration"
+        dateOfRegLabel.font = UIFont.systemFont(ofSize: 15)
         self.view.addSubview(dateOfRegLabel)
         dateOfRegLabel.snp.makeConstraints { (maker) in
             maker.centerX.equalToSuperview()
@@ -78,21 +93,29 @@ class SettingsViewController: UIViewController, SettingsViewDelegate {
         inputFormatter.dateFormat = "d MMM y"
         let date = inputFormatter.string(from: showDate!)
         
-        let dateOfRegProperty = BigUILabel(text: date)
+        let dateOfRegProperty = UILabel()
+        dateOfRegProperty.text = date
+        dateOfRegProperty.font = UIFont.boldSystemFont(ofSize: 25.0)
+        dateOfRegProperty.numberOfLines = 2
         self.view.addSubview(dateOfRegProperty)
         dateOfRegProperty.snp.makeConstraints { (maker) in
             maker.centerX.equalToSuperview()
             maker.top.equalTo(dateOfRegLabel.snp.bottom).offset(10)
         }
         
-        let scoreLabel = SmallUILabel(text: "Score")
+        let scoreLabel = UILabel()
+        scoreLabel.text = "Score"
+        scoreLabel.font = UIFont.systemFont(ofSize: 15)
         self.view.addSubview(scoreLabel)
         scoreLabel.snp.makeConstraints { (maker) in
             maker.centerX.equalToSuperview()
             maker.top.equalTo(dateOfRegProperty.snp.bottom).offset(40)
         }
         
-        let scoreProperty = BigUILabel(text: String(settingsPresenter.getCurrentPlayerScore()))
+        scoreProperty = UILabel()
+        scoreProperty.text = String(settingsPresenter.getCurrentPlayerScore())
+        scoreProperty.font = UIFont.boldSystemFont(ofSize: 25.0)
+        scoreProperty.numberOfLines = 2
         self.view.addSubview(scoreProperty)
         scoreProperty.snp.makeConstraints { (maker) in
             maker.centerX.equalToSuperview()
@@ -142,7 +165,13 @@ class SettingsViewController: UIViewController, SettingsViewDelegate {
     
     @objc
     private func logout() {
-        self.view.window!.rootViewController = LoginViewController()
+        let nvc = UINavigationController(rootViewController: LoginViewController())
+        nvc.navigationBar.tintColor = .black
+        self.view.window!.rootViewController = nvc
+    }
+    
+    func updateUI() {
+        scoreProperty.text = String(settingsPresenter.getCurrentPlayerScore())
     }
     
 }

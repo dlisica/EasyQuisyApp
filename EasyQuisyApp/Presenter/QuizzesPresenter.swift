@@ -2,24 +2,28 @@ import Foundation
 
 class QuizzesPresenter {
     
-    private let dataService : DataService
-    weak private var quizzesViewDelegate : QuizzesViewDelegate?
+    weak private var quizzesViewDelegate: QuizzesViewDelegate?
     
-    private var quizzes  = [Quiz]() {
+    private var quizzes = [Quiz]() {
         didSet {
             setCategories()
+            quizzesViewDelegate?.updateUI()
         }
     }
+    
     private var categories = [QuizCategory]()
         
-    init(dataService : DataService) {
-        self.dataService = dataService
-        
-        quizzes = dataService.quizzes
-        setCategories()
+    init() {
+        getQuizzes()
     }
     
-    func setViewDelegate(quizzesViewDelegate : QuizzesViewDelegate?){
+    private func getQuizzes() {
+        NetworkService.fetchQuizzes() { (quizzes: [Quiz]) in
+            self.quizzes = quizzes
+        }
+    }
+    
+    func setViewDelegate(quizzesViewDelegate: QuizzesViewDelegate?){
         self.quizzesViewDelegate = quizzesViewDelegate
     }
     

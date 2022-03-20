@@ -2,12 +2,7 @@ import Foundation
 
 class LoginPresenter {
     
-    private let dataService: DataService
     weak private var loginViewDelegate: LoginViewDelegate?
-        
-    init(dataService: DataService){
-        self.dataService = dataService
-    }
     
     func setViewDelegate(loginViewDelegate: LoginViewDelegate?){
         self.loginViewDelegate = loginViewDelegate
@@ -22,12 +17,12 @@ class LoginPresenter {
     }
     
     func login(username: String, password: String) {
-        let status = dataService.loginPlayer(username: username, password: password)
-        
-        if case Status.success = status {
-            loginViewDelegate?.onSuccesfulLogin()
-        } else {
-            loginViewDelegate?.showErrorLabel(text: status.getMessage()!)
+        NetworkService.loginPlayer(username: username, password: password) { (status: Status) in
+            if case Status.success = status {
+                self.loginViewDelegate?.onSuccesfulLogin()
+            } else {
+                self.loginViewDelegate?.showErrorLabel(text: "Username or password is wrong!")
+            }
         }
     }
     

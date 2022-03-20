@@ -1,10 +1,3 @@
-//
-//  StartQuizPresenter.swift
-//  PopQuizApp
-//
-//  Created by David Lisica on 19.12.2021.
-//
-
 import Foundation
 
 class StartQuizPresenter {

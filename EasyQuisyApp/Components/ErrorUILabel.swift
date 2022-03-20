@@ -1,10 +1,3 @@
-//
-//  ErrorUILabel.swift
-//  PopQuizApp
-//
-//  Created by David Lisica on 30.11.2021.
-//
-
 import UIKit
 
 class ErrorUILabel: UILabel {

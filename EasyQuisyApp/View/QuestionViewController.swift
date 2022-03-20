@@ -1,13 +1,6 @@
-//
-//  QuestionViewController.swift
-//  PopQuizApp
-//
-//  Created by David Lisica on 21.12.2021.
-//
-
 import UIKit
 
-protocol QuestionViewDelegate : NSObjectProtocol {
+protocol QuestionViewDelegate: NSObjectProtocol {
     func markCorrectAnswer(ofIndex index: Int)
     func markWrongAnswer(ofIndex index: Int)
 }
@@ -22,7 +15,7 @@ class QuestionViewController: UIViewController, QuestionViewDelegate {
     var nextQuestionButton: CustomUIButton!
     
     init(quiz: Quiz, questionIndex: Int, previousAnswers: [Bool]) {
-        questionPresenter = QuestionPresenter(dataService: DataService.getDataService())
+        questionPresenter = QuestionPresenter()
         questionPresenter.setQuizData(quiz: quiz, questionIndex: questionIndex, previousAnswers: previousAnswers)
         super.init(nibName: nil, bundle: nil)
     }
@@ -124,12 +117,8 @@ class QuestionViewController: UIViewController, QuestionViewDelegate {
             let result = previousAnswers.filter { $0 == true }.count
             let numOfQuestions = questionPresenter.quiz.questions.count
             
-            //added start
-            
             questionPresenter.submitQuizResult(playingTime: 11.22, score: Int(Double(result) / Double(numOfQuestions) * 1000))
-            
-            //added end
-            
+
             let newVC = ResultViewController(correctAnswers: result, numberOfQuestions: numOfQuestions)
             navigationController?.pushViewController(newVC, animated: true)
             return

@@ -1,28 +1,21 @@
-//
-//  LeaderboardViewController.swift
-//  PopQuizApp
-//
-//  Created by David Lisica on 23.12.2021.
-//
-
 import UIKit
 
 protocol LeaderboardViewDelegate: NSObjectProtocol {
-    
+    func updateUI()
 }
 
-class LeaderboardViewController: UIViewController {
-    
-    private let leaderboardPresenter = LeaderboardPresenter(dataService: DataService.getDataService())
+class LeaderboardViewController: UIViewController, LeaderboardViewDelegate {
+  
+    private let leaderboardPresenter = LeaderboardPresenter()
     
     private var leaderboardTableView: UITableView!
-    
-    private var leaderboard: [Player]!
     
     let cellIdentifier = "cellId"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        leaderboardPresenter.setViewDelegate(leaderBoardViewDelegate: self)
 
         setLayout()
         setTableView()
@@ -57,11 +50,13 @@ class LeaderboardViewController: UIViewController {
     }
     
     private func setTableView() {
-        leaderboard = leaderboardPresenter.getLeaderboard()
-        
         leaderboardTableView.register(LeaderboardRow.self, forCellReuseIdentifier: cellIdentifier)
         leaderboardTableView.dataSource = self
         leaderboardTableView.delegate = self
+    }
+    
+    func updateUI() {
+        leaderboardTableView.reloadData()
     }
     
 }
@@ -73,14 +68,14 @@ extension LeaderboardViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return leaderboard.count
+        return leaderboardPresenter.getNumberOfPlayers()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: LeaderboardRow = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! LeaderboardRow
         
-        let player = leaderboard[indexPath.row]
-        cell.setRow(playerNumber: indexPath.row+1, playerName: player.username, playerScore: 0.0)
+        let player = leaderboardPresenter.getPlayer(atIndex: indexPath.row)
+        cell.setRow(playerNumber: indexPath.row+1, playerName: player.username, playerScore: player.averageScore)
         cell.selectionStyle = .none
         
         if leaderboardPresenter.isCurrentPlayer(player: player) {

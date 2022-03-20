@@ -20,13 +20,10 @@
 		AF246AD72754FA7600C3ECA9 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF246AD62754FA7600C3ECA9 /* Status.swift */; };
 		AF246ADE27550E6800C3ECA9 /* QuizzesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF246ADD27550E6800C3ECA9 /* QuizzesViewController.swift */; };
 		AF246AE027550E7900C3ECA9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF246ADF27550E7900C3ECA9 /* SettingsViewController.swift */; };
-		AF246AE42755392A00C3ECA9 /* SmallUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF246AE32755392A00C3ECA9 /* SmallUILabel.swift */; };
 		AF246AE62755511800C3ECA9 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF246AE52755511800C3ECA9 /* SettingsPresenter.swift */; };
-		AF246AE82755567100C3ECA9 /* BigUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF246AE72755567100C3ECA9 /* BigUILabel.swift */; };
 		AF246AEB2755605D00C3ECA9 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF246AEA2755605D00C3ECA9 /* ChangePasswordViewController.swift */; };
 		AF246AED2755616000C3ECA9 /* ChangePasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF246AEC2755616000C3ECA9 /* ChangePasswordPresenter.swift */; };
 		AF2DD6CF27AD3CFF0018D2A7 /* QuizResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2DD6CE27AD3CFF0018D2A7 /* QuizResult.swift */; };
-		AF2E7E3627576C35006E6A6D /* BigInputUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2E7E3527576C35006E6A6D /* BigInputUITextField.swift */; };
 		AF448939276BDD1300FD3C8C /* QuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF448938276BDD1300FD3C8C /* QuizTableViewCell.swift */; };
 		AF5ED30727728E2900D4884E /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5ED30627728E2900D4884E /* QuestionViewController.swift */; };
 		AF5ED30927728E4600D4884E /* QuestionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5ED30827728E4600D4884E /* QuestionPresenter.swift */; };
@@ -68,13 +65,10 @@
 		AF246AD62754FA7600C3ECA9 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		AF246ADD27550E6800C3ECA9 /* QuizzesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesViewController.swift; sourceTree = "<group>"; };
 		AF246ADF27550E7900C3ECA9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		AF246AE32755392A00C3ECA9 /* SmallUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallUILabel.swift; sourceTree = "<group>"; };
 		AF246AE52755511800C3ECA9 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
-		AF246AE72755567100C3ECA9 /* BigUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigUILabel.swift; sourceTree = "<group>"; };
 		AF246AEA2755605D00C3ECA9 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		AF246AEC2755616000C3ECA9 /* ChangePasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordPresenter.swift; sourceTree = "<group>"; };
 		AF2DD6CE27AD3CFF0018D2A7 /* QuizResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResult.swift; sourceTree = "<group>"; };
-		AF2E7E3527576C35006E6A6D /* BigInputUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigInputUITextField.swift; sourceTree = "<group>"; };
 		AF448938276BDD1300FD3C8C /* QuizTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTableViewCell.swift; sourceTree = "<group>"; };
 		AF5ED30627728E2900D4884E /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 		AF5ED30827728E4600D4884E /* QuestionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionPresenter.swift; sourceTree = "<group>"; };
@@ -158,10 +152,7 @@
 				AF246AD02754E25000C3ECA9 /* InputUITextField.swift */,
 				AF246AD22754E70000C3ECA9 /* CustomUIButton.swift */,
 				AF246AD42754E80800C3ECA9 /* TitleUILabel.swift */,
-				AF246AE32755392A00C3ECA9 /* SmallUILabel.swift */,
-				AF246AE72755567100C3ECA9 /* BigUILabel.swift */,
 				AFE0960E275688FA005941F5 /* ErrorUILabel.swift */,
-				AF2E7E3527576C35006E6A6D /* BigInputUITextField.swift */,
 				AF448938276BDD1300FD3C8C /* QuizTableViewCell.swift */,
 				AF5ED30A27729AF600D4884E /* AnswerButton.swift */,
 				AFF0D9462773591F00E90880 /* ProgressBar.swift */,
@@ -373,7 +364,6 @@
 				AF246AC02753AA8A00C3ECA9 /* SignupViewController.swift in Sources */,
 				AF5ED30B27729AF600D4884E /* AnswerButton.swift in Sources */,
 				AFE7D4682774C4500043E488 /* ResultViewController.swift in Sources */,
-				AF2E7E3627576C35006E6A6D /* BigInputUITextField.swift in Sources */,
 				AF448939276BDD1300FD3C8C /* QuizTableViewCell.swift in Sources */,
 				AF246AE62755511800C3ECA9 /* SettingsPresenter.swift in Sources */,
 				AF246AED2755616000C3ECA9 /* ChangePasswordPresenter.swift in Sources */,
@@ -383,10 +373,8 @@
 				AF21E18D2774F86C007FD2C0 /* LeaderboardRow.swift in Sources */,
 				AF246AC82753ED3000C3ECA9 /* DataService.swift in Sources */,
 				AF246AD52754E80800C3ECA9 /* TitleUILabel.swift in Sources */,
-				AF246AE82755567100C3ECA9 /* BigUILabel.swift in Sources */,
 				AF246AE027550E7900C3ECA9 /* SettingsViewController.swift in Sources */,
 				AFF0D9472773591F00E90880 /* ProgressBar.swift in Sources */,
-				AF246AE42755392A00C3ECA9 /* SmallUILabel.swift in Sources */,
 				AF246AEB2755605D00C3ECA9 /* ChangePasswordViewController.swift in Sources */,
 				AF246AD32754E70000C3ECA9 /* CustomUIButton.swift in Sources */,
 				AF21E18B2774F6C0007FD2C0 /* LeaderboardViewController.swift in Sources */,

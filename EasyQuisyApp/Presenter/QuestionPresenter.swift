@@ -1,26 +1,14 @@
-//
-//  QuestionPresenter.swift
-//  PopQuizApp
-//
-//  Created by David Lisica on 21.12.2021.
-//
-
 import Foundation
 
 class QuestionPresenter {
    
-    private let dataService : DataService
-    weak private var questionViewDelegate : QuestionViewDelegate?
+    weak private var questionViewDelegate: QuestionViewDelegate?
     
     var quiz: Quiz!
     var questionIndex: Int!
     var previousAnswers = [Bool]()
     
     var answerState = false
-        
-    init(dataService : DataService) {
-        self.dataService = dataService
-    }
     
     func setQuizData(quiz: Quiz, questionIndex: Int, previousAnswers: [Bool]) {
         self.quiz = quiz
@@ -52,9 +40,8 @@ class QuestionPresenter {
         }
     }
     
-    //added
     func submitQuizResult(playingTime: Double, score: Int) {
-        dataService.submitQuizResult(playerId: dataService.currentPlayer.id, quizId: quiz.id, playingTime: playingTime, score: score)
+        NetworkService.submitQuizResult(playerId: DataService.getDataService().currentPlayer.id, quizId: quiz.id, playingTime: playingTime, score: score)
     }
     
     

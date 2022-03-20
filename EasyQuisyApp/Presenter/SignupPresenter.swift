@@ -2,14 +2,9 @@ import Foundation
 
 class SignupPresenter {
     
-    private let dataService : DataService
-    weak private var signupViewDelegate : SignupViewDelegate?
-        
-    init(dataService : DataService){
-        self.dataService = dataService
-    }
+    weak private var signupViewDelegate: SignupViewDelegate?
     
-    func setViewDelegate(signupViewDelegate : SignupViewDelegate?){
+    func setViewDelegate(signupViewDelegate: SignupViewDelegate?){
         self.signupViewDelegate = signupViewDelegate
     }
     
@@ -72,8 +67,14 @@ class SignupPresenter {
             return
         }
         
-        dataService.registerPlayer(emailAdress: emailAdress, username: username, password: password)
-        signupViewDelegate?.onSuccessfulSignup()
+        NetworkService.registerPlayer(emailAdress: emailAdress, username: username, password: password) { (status: Status) in
+            if case Status.success = status {
+                self.signupViewDelegate?.onSuccessfulSignup()
+            } else {
+                self.signupViewDelegate?.showErrorLabel(text: status.getMessage()!)
+            }
+        }
+        
     }
   
 }

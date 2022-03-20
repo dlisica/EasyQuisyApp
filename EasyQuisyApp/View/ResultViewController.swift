@@ -1,10 +1,3 @@
-//
-//  ResultViewController.swift
-//  PopQuizApp
-//
-//  Created by David Lisica on 23.12.2021.
-//
-
 import UIKit
 
 class ResultViewController: UIViewController {

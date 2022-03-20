@@ -1,10 +1,3 @@
-//
-//  TitleUILabel.swift
-//  PopQuizApp
-//
-//  Created by David Lisica on 29.11.2021.
-//
-
 import UIKit
 
 class TitleUILabel: UILabel {

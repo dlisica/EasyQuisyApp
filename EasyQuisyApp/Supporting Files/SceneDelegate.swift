@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  PopQuizApp
-//
-//  Created by David Lisica on 26.11.2021.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {

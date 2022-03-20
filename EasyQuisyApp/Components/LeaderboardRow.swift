@@ -1,17 +1,10 @@
-//
-//  LeaderboardRow.swift
-//  PopQuizApp
-//
-//  Created by David Lisica on 23.12.2021.
-//
-
 import UIKit
 
 class LeaderboardRow: UITableViewCell {
     
     var playerNumber: Int!
     var playerName: String!
-    var playerScore: Double!
+    var playerScore: Int!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,7 +16,7 @@ class LeaderboardRow: UITableViewCell {
         setLayout()
     }
     
-    func setRow(playerNumber: Int, playerName: String, playerScore: Double) {
+    func setRow(playerNumber: Int, playerName: String, playerScore: Int) {
         self.playerNumber = playerNumber
         self.playerName = playerName
         self.playerScore = playerScore

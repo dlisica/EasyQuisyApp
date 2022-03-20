@@ -1,10 +1,3 @@
-//
-//  SystemDesign.swift
-//  PopQuizApp
-//
-//  Created by David Lisica on 20.12.2021.
-//
-
 import Foundation
 import UIKit
 

@@ -1,18 +1,12 @@
-//
-//  QuizzesViewController.swift
-//  PopQuizApp
-//
-//  Created by David Lisica on 29.11.2021.
-//
-
 import UIKit
 
-protocol QuizzesViewDelegate : NSObjectProtocol {
+protocol QuizzesViewDelegate: NSObjectProtocol {
+    func updateUI()
 }
 
 class QuizzesViewController: UIViewController, QuizzesViewDelegate {
     
-    private let quizzesPresenter = QuizzesPresenter(dataService: DataService.getDataService())
+    private let quizzesPresenter = QuizzesPresenter()
     
     private var quizTableView: UITableView!
     
@@ -60,6 +54,11 @@ class QuizzesViewController: UIViewController, QuizzesViewDelegate {
         quizTableView.delegate = self
         
         quizTableView.rowHeight = 150
+    }
+    
+    
+    func updateUI() {
+        quizTableView.reloadData()
     }
 
 }

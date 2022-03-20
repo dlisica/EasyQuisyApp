@@ -2,14 +2,10 @@ import Foundation
 
 class SettingsPresenter {
     
-    private let dataService : DataService
-    weak private var settingsViewDelegate : SettingsViewDelegate?
-        
-    init(dataService : DataService){
-        self.dataService = dataService
-    }
+    private let dataService = DataService.getDataService()
+    weak private var settingsViewDelegate: SettingsViewDelegate?
     
-    func setViewDelegate(settingsViewDelegate : SettingsViewDelegate?){
+    func setViewDelegate(settingsViewDelegate: SettingsViewDelegate?){
         self.settingsViewDelegate = settingsViewDelegate
     }
     

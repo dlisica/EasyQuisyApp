@@ -9,11 +9,9 @@ enum RequestError: String, Error {
 
 class NetworkService {
     
-    private lazy var dataService = DataService.getDataService()
+    static let baseUrl = "http://easy-quisy-api.herokuapp.com"
     
-    private let baseUrl = "http://localhost:8080"
-    
-    private func executeUrlRequest<T>(_ request: URLRequest, completionHandler: @escaping (Result<T, RequestError>) -> Void) where T : Decodable {
+    static func executeUrlRequest<T>(_ request: URLRequest, completionHandler: @escaping (Result<T, RequestError>) -> Void) where T : Decodable {
         
         let dataTask = URLSession.shared.dataTask(with: request) { data, response, err in
             
@@ -54,7 +52,7 @@ class NetworkService {
         dataTask.resume()
     }
     
-    func fetchQuizzes() {
+    static func fetchQuizzes(returnQuizzes: @escaping ([Quiz]) -> Void) {
         
         guard let url = URL(string: baseUrl+"/quiz") else {
             return
@@ -68,14 +66,15 @@ class NetworkService {
             switch result {
             case .failure(let error):
                 print("Fetch quizzes: \(error) occured!")
+                returnQuizzes([Quiz]())
             case .success(let value):
-                self.dataService.quizzes = value
                 print("Quizzes fetched successfully!")
+                returnQuizzes(value)
             }
         }
     }
     
-    func fetchLeaderboard() {
+    static func fetchLeaderboard(returnLeaderboard: @escaping ([Player]) -> Void) {
         
         guard let url = URL(string: baseUrl+"/player/leaderboard") else {
             return
@@ -89,14 +88,15 @@ class NetworkService {
             switch result {
             case .failure(let error):
                 print("Fetch leaderboard: \(error) occured!")
+                returnLeaderboard([Player]())
             case .success(let value):
-                self.dataService.leaderboard = value
                 print("Leaderboard fetched successfully!")
+                returnLeaderboard(value)
             }
         }
     }
     
-    func registerPlayer(emailAdress: String, username: String, password: String) {
+    static func registerPlayer(emailAdress: String, username: String, password: String, updateUI: @escaping (Status) -> Void) {
         
         let date = Date()
         let dateFormatter = DateFormatter()
@@ -123,13 +123,15 @@ class NetworkService {
             switch result {
             case .failure(let error):
                 print("Register player: \(error) occured!")
+                updateUI(Status.error("Username is already taken!"))
             case .success(let value):
                 print("Register player ID: \(value.id)")
+                updateUI(Status.success)
             }
         }
     }
     
-    func loginPlayer(username: String, password: String) {
+    static func loginPlayer(username: String, password: String, updateUI: @escaping (Status) -> Void) {
         
         guard let url = URL(string: baseUrl+"/player/login") else {
             return
@@ -149,15 +151,17 @@ class NetworkService {
             switch result {
             case .failure(let error):
                 print("Login player: \(error) occured!")
+                updateUI(Status.error(error.rawValue))
             case .success(let value):
-                self.dataService.currentPlayer = value
-                print("Login player ID: \(value.id)")
+                print("Logged player with ID: \(value.id)")
+                DataService.getDataService().currentPlayer = value  //remove later
+                updateUI(Status.success)
             }
         }
         
     }
     
-    func changePassword(playerId: String, oldPassword: String, newPassword: String) {
+    static func changePassword(playerId: String, oldPassword: String, newPassword: String, updateUI: @escaping (Status) -> Void) {
       
         guard let url = URL(string: baseUrl+"/player/change-password") else {
             return
@@ -178,14 +182,16 @@ class NetworkService {
             switch result {
             case .failure(let error):
                 print("Change password: \(error) occured!")
+                updateUI(Status.error(error.rawValue))
             case .success(let value):
                 print("Change password player ID: \(value.id)")
+                updateUI(Status.success)
             }
         }
         
     }
     
-    func submitQuizResult(playerId: String, quizId: String, playingTime: Double, score: Int) {
+    static func submitQuizResult(playerId: String, quizId: String, playingTime: Double, score: Int) {
         
         guard let url = URL(string: baseUrl+"/result") else {
             return
